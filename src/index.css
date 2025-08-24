@@ -27,6 +27,10 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem
+
+     /* Custom Bizedge colors */
+    --bizedge-blue-500: 224 57% 53%; /* #4069D0 */
+    --bizedge-blue-50: 225 63% 95%;  /* #EBEFFA */
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -53,5 +57,21 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%
+  }
+
+    @font-face {
+    font-family: "Black Sans";
+    src: url("/fonts/BlackSans-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Black Sans";
+    src: url("./fonts/") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
   }
 }
