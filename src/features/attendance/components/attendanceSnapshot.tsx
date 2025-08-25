@@ -33,7 +33,7 @@ function AttendanceSnapshot({
           </div>
           <hr className="border-t-2 border-[#BCEFFF] my-2 sm:my-3" />
           <div className="flex flex-row gap-3">
-            <div className="flex-1 flex flex-col bg-[#CCF3FF] p-4 sm:p-5 rounded-2xl border-[0.85px]">
+            <div className="flex-1 flex flex-col bg-[#CCF3FF] p-4 sm:p-5 rounded-2xl">
               <span className="text-xs sm:text-sm text-[#545454]">
                 Days Punctual
               </span>
@@ -41,7 +41,7 @@ function AttendanceSnapshot({
                 {punctuality.daysPunctual}
               </span>
             </div>
-            <div className="flex-1 flex flex-col bg-[#CCF3FF] p-4 sm:p-5 rounded-2xl border-[0.85px]">
+            <div className="flex-1 flex flex-col bg-[#CCF3FF] p-4 sm:p-5 rounded-2xl">
               <span className="text-xs sm:text-sm text-[#545454]">
                 Days Late
               </span>
@@ -65,7 +65,7 @@ function AttendanceSnapshot({
           </div>
           <hr className="border-t-2 border-[#FCDC9C] my-2 sm:my-3" />
           <div className="flex flex-row gap-3">
-            <div className="flex-1 flex flex-col bg-[#FDEDCE] p-4 sm:p-5 rounded-2xl border-[0.85px]">
+            <div className="flex-1 flex flex-col bg-[#FDEDCE] p-4 sm:p-5 rounded-2xl">
               <span className="text-xs sm:text-sm text-[#545454]">
                 Days Punctual
               </span>
@@ -73,7 +73,7 @@ function AttendanceSnapshot({
                 {attendance.daysPunctual}
               </span>
             </div>
-            <div className="flex-1 flex flex-col bg-[#FDEDCE] p-4 sm:p-5 rounded-2xl border-[0.85px]">
+            <div className="flex-1 flex flex-col bg-[#FDEDCE] p-4 sm:p-5 rounded-2xl">
               <span className="text-xs sm:text-sm text-[#545454]">
                 Days Late
               </span>
