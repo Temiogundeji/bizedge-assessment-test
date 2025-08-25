@@ -3,5 +3,6 @@ export interface Task {
   title: string;
   status: "pending" | "completed" | "in-progress";
   priority: "low" | "medium" | "high";
+  actions: [];
   dueDate?: string;
 }
