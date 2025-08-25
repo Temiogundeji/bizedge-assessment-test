@@ -10,7 +10,7 @@ const WelcomeHeader: React.FC<HeaderProps> = ({
   subtitle = "William Oluwadamilare", //black-sans-600 semibold
 }) => {
   return (
-    <header className="p-6">
+    <header className="py-6">
       <h1 className="text-lg text-gray-600">{title}</h1>
       <p className="text-2xl font-bold text-gray-900">{subtitle}</p>
     </header>
