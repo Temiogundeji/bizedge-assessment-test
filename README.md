@@ -5,7 +5,7 @@ This project allows employees to **Clock In/Out**, **Start/End Breaks**, and tra
 ## Live Demo
 
 Check out the live demo deployed on **Netlify**:  
-[Attendance Tracker Live](https://bizedge-assessment-test.netlify.app/)
+[Makay - Human Resources Management](https://bizedge-assessment-test.netlify.app/)
 
 ---
 
