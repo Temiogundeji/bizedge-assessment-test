@@ -1,10 +1,5 @@
 
----
-
-````markdown
-# Makay
-
-A modern **Makay - Human Resources Management** built with **Vite**, **React**, **TypeScript**, **Redux Toolkit**, **Tailwind CSS**, **Shadcn/UI**, and **Lucide React**.  
+A modern Human Resources Management** built with **Vite**, **React**, **TypeScript**, **Redux Toolkit**, **Tailwind CSS**, **Shadcn/UI**, and **Lucide React**.  
 This project allows employees to **Clock In/Out**, **Start/End Breaks**, and track attendance in real-time. Modals are fully reusable and the dashboard is fully responsive.
 
 ![Human Resources Dashboard Screenshot](https://placehold.co/800x400)  
@@ -97,8 +92,3 @@ npm run preview
 
 ---
 
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
-```
