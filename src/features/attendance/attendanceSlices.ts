@@ -78,7 +78,7 @@ export const attendanceSlice = createSlice({
       });
     },
     clockOut: (state, action) => {
-      const { time, date } = action.payload;
+      const { time } = action.payload;
       state.currentStatus.isClockedIn = false;
       state.currentStatus.onBreak = false;
 

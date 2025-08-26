@@ -15,11 +15,9 @@ import {
 import {
   clockIn,
   clockOut,
-  openClockInModal,
-  closeClockInModal,
-  openClockOutModal,
-  closeClockOutModal,
+  endBreak,
   setLocation,
+  startBreak,
 } from "../attendanceSlices";
 import { useSelector } from "react-redux";
 import { closeModal, openModal } from "../../ui/uiSlice";
@@ -84,6 +82,10 @@ function AttendanceTimer() {
   const { currentStatus } = useAppSelector(
     (state: RootState) => state.attendance
   );
+  const isStartBreakOpen = useSelector(
+    (state: RootState) => state.ui.modals.startBreak
+  );
+
   const [timeCompleted, setTimeCompleted] = useState<{
     hours: number;
     minutes: number;
@@ -118,15 +120,6 @@ function AttendanceTimer() {
 
   const handleLocationChange = (location: string) => {
     dispatch(setLocation(location));
-  };
-
-  const handleClockAction = () => {
-    if (currentStatus.isClockedIn) {
-      const currentTimeStr = formatDate(new Date());
-      dispatch(clockOut({ time: currentTimeStr }));
-    } else {
-      dispatch(openModal("clockIn"));
-    }
   };
 
   const formatElapsedTime = () => {
@@ -169,32 +162,31 @@ function AttendanceTimer() {
   return (
     <div className="flex flex-col w-full sm:w-[400px] 2xl:w-[450px]">
       {currentStatus.onBreak === true ? (
-        <div className="bg-yellow-50 p-4 rounded-lg shadow-md flex flex-col items-center">
-          <div className="text-center">
-            <p className="text-sm text-gray-600">Break Time</p>
-            <p className="text-xs text-gray-500">Wed 17 Jul, 2023</p>
+        <div className="">
+          <div className="bg-[#FDEDCE] md:h-[109px] py-5 px-5 rounded-lg shadow-md flex flex-col justify-center items-start">
+            {" "}
+            <div className="flex flex-col">
+              <p className="text-sm text-gray-600 font-semibold">Break Time</p>
+              <p className="text-xs text-gray-500 font-normal">
+                Wed 17 Jul, 2023
+              </p>
+            </div>
+            <div className="text-4xl font-semibold text-yellow-700 mt-2">
+              59:49
+            </div>
           </div>
-          <div className="text-4xl font-bold text-yellow-700 mt-2">59:49</div>
-          <div className="mt-4 w-16 h-16 bg-yellow-200 rounded-full flex items-center justify-center">
-            <svg
-              className="w-8 h-8 text-yellow-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-          </div>
-          <button className="mt-4 w-full bg-yellow-400 text-white py-2 rounded-md hover:bg-yellow-500 transition duration-200">
+          <button
+            onClick={() => dispatch(endBreak())}
+            className="top-[12.78px] mt-4 w-full bg-[#F8B636] text-[#171717] font-semibold py-2 rounded-md hover:bg-yellow-500 transition duration-200"
+          >
             End Break
           </button>
-          <button className="mt-2 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+          <button
+            onClick={() => {
+              dispatch(openModal("clockOut"));
+            }}
+            className="top-[12.78px] mt-4 w-full bg-[#4069D0] text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
+          >
             Clock out
           </button>
         </div>
@@ -239,58 +231,64 @@ function AttendanceTimer() {
               </div>
             </div>
           </Card>
-        </div>
-      )}
-      <Card className="bg-[#EBEFFA] border-[#EBEFFA] rounded-lg border-t-0 border-l-0 border-r-0 mt-4">
-        <div className="flex flex-row items-center justify-between p-2 sm:p-3">
-          <div className="flex flex-row items-center gap-1 sm:gap-2 font-bold">
-            <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
-              {timeDisplay?.h1}
-            </span>
-            <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
-              {timeDisplay?.h2}
-            </span>
-            <span className="text-sm sm:text-base">:</span>
-            <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
-              {timeDisplay?.m1}
-            </span>
-            <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
-              {timeDisplay?.m2}
-            </span>
-          </div>
-          <div className="border-l border-gray-300 h-6 sm:h-8"></div>
-          <div className="flex flex-col text-xs sm:text-sm text-gray-600 font-normal">
-            <p>Last Clock-in Time & Date:</p>
-            <p className="font-semibold">{clockInTime}</p>
-          </div>
-        </div>
-      </Card>
-      {currentStatus.isClockedIn === false ? (
-        <div>
-          {" "}
-          <Button
-            onClick={() => dispatch(openModal("clockIn"))}
-            className="mt-4 bg-[#5B7ED7] text-white w-full py-2 sm:py-3 text-sm sm:text-base"
-          >
-            Clock In
-          </Button>
-        </div>
-      ) : (
-        <div className="flex gap-3 mt-3">
-          <Button
-            onClick={() => {
-              dispatch(openModal("clockOut"));
-            }}
-            className="bg-[#4F75E5] hover:bg-[#3C5CC4] text-white font-medium px-6 py-2 rounded-md shadow-md max-w-full flex-2"
-          >
-            Clock Out
-          </Button>
+          <Card className="bg-[#EBEFFA] border-[#EBEFFA] rounded-lg border-t-0 border-l-0 border-r-0 mt-4">
+            <div className="flex flex-row items-center justify-between p-2 sm:p-3">
+              <div className="flex flex-row items-center gap-1 sm:gap-2 font-bold">
+                <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
+                  {timeDisplay?.h1}
+                </span>
+                <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
+                  {timeDisplay?.h2}
+                </span>
+                <span className="text-sm sm:text-base">:</span>
+                <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
+                  {timeDisplay?.m1}
+                </span>
+                <span className="bg-gray-100 rounded-lg shadow-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm">
+                  {timeDisplay?.m2}
+                </span>
+              </div>
+              <div className="border-l border-gray-300 h-6 sm:h-8"></div>
+              <div className="flex flex-col text-xs sm:text-sm text-gray-600 font-normal">
+                <p>Last Clock-in Time & Date:</p>
+                <p className="font-semibold">{clockInTime}</p>
+              </div>
+            </div>
+          </Card>
+          {currentStatus.isClockedIn === false ? (
+            <div>
+              {" "}
+              <Button
+                onClick={() => dispatch(openModal("clockIn"))}
+                className="mt-4 bg-[#5B7ED7] text-white w-full py-2 sm:py-3 text-sm sm:text-base"
+              >
+                Clock In
+              </Button>
+            </div>
+          ) : (
+            <div className="flex gap-3 mt-3">
+              <Button
+                onClick={() => {
+                  dispatch(openModal("clockOut"));
+                }}
+                className="bg-[#4F75E5] hover:bg-[#3C5CC4] text-white font-medium px-6 py-2 rounded-md shadow-md max-w-full flex-2"
+              >
+                Clock Out
+              </Button>
 
-          <Button className="bg-[#F5A623] hover:bg-[#d48a15] text-black font-medium px-6 py-2 rounded-md shadow-md">
-            Take Break
-          </Button>
+              <Button
+                onClick={() => {
+                  dispatch(startBreak());
+                }}
+                className="bg-[#F5A623] hover:bg-[#d48a15] text-black font-medium px-6 py-2 rounded-md shadow-md"
+              >
+                Take Break
+              </Button>
+            </div>
+          )}
         </div>
       )}
+
       {/* Clock In Modal */}
       <Dialog
         open={isClockInOpen}
@@ -437,6 +435,73 @@ function AttendanceTimer() {
               // onClick={() => dispatch(closeModal("clockIn"))}
             >
               Enter a Custom Time
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Start Break Modal */}
+      <Dialog
+        open={isStartBreakOpen}
+        onOpenChange={(open) =>
+          open
+            ? dispatch(openModal("clockOut"))
+            : dispatch(closeModal("clockOut"))
+        }
+      >
+        <DialogContent className="bg-white max-w-sm rounded-2xl p-6 text-center">
+          <DialogHeader className="mb-4">
+            <DialogTitle className="text-gray-600 font-medium text-base">
+              Confirm Break Start
+            </DialogTitle>
+          </DialogHeader>
+
+          {/* Profile Image */}
+          <div className="flex justify-center mb-4">
+            <img
+              src="https://placehold.co/600x400"
+              alt="Profile"
+              className="w-16 h-16 rounded-full object-cover"
+            />
+          </div>
+
+          {/* Start Break Info */}
+          <div className="mb-6">
+            <p className="text-lg font-semibold text-gray-900">
+              Take a Break at{" "}
+              {new Date().toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
+            </p>
+
+            <p className="text-xs">
+              {currentStatus?.location}{" "}
+              {new Date(today).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <Button
+              onClick={() => {
+                dispatch(startBreak());
+                dispatch(closeModal("startBreak"));
+              }}
+              className="bg-[#2898A4] hover:bg-teal-700 text-white w-full"
+            >
+              Yes, Take Break
+            </Button>
+            <Button
+              variant="secondary"
+              className="bg-teal-50 text-[#2898A4] hover:bg-teal-100 w-full"
+              onClick={() => dispatch(closeModal("clockOut"))}
+            >
+              Not Continue Working
             </Button>
           </div>
         </DialogContent>

@@ -4,6 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 interface ModalsState {
   clockIn: boolean;
   clockOut: boolean;
+  startBreak: boolean;
   breakEnd: boolean;
   timeoffRequest: boolean;
   taskCreate: boolean;
@@ -27,6 +28,7 @@ const initialState: UIState = {
   modals: {
     clockIn: false,
     clockOut: false,
+    startBreak: false,
     breakEnd: false,
     timeoffRequest: false,
     taskCreate: false,
