@@ -81,6 +81,7 @@ npm run preview
 * UUID
 * Vite
 
+## Notes
 * All modals are reusable and can be easily extended
 * Date and time formatting is handled using custom utility functions
 * Designed with responsiveness and accessibility in mind
