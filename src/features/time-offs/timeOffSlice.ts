@@ -21,7 +21,9 @@ type TimeoffStatus = "upcoming" | "ongoing" | "completed" | "cancelled";
 interface TimeoffRequest {
   id: string | number;
   employeeId: string;
+  avatar: string;
   employeeName: string;
+  position: string;
   type: TimeoffType;
   startDate: string;
   endDate: string;
@@ -50,7 +52,9 @@ const timeoffData: Omit<TimeoffState, "loading" | "error" | "selectedRequest"> =
       {
         id: 1,
         employeeId: "58e196ec-14ee-4990-aeb5-5cea8dca28ee",
+        avatar: "",
         employeeName: "John Micheal",
+        position: "Backend Engineer",
         type: "annual",
         startDate: "2023-01-23",
         endDate: "2023-01-25",
@@ -62,8 +66,10 @@ const timeoffData: Omit<TimeoffState, "loading" | "error" | "selectedRequest"> =
       {
         id: 2,
         employeeId: "7268b8a4-2b90-4a2d-ac66-b012f0759a26",
+        avatar: "",
         employeeName: "David Silva",
         type: "annual",
+        position: "Mobile Engineer",
         startDate: "2023-01-23",
         endDate: "2023-01-25",
         days: 2,

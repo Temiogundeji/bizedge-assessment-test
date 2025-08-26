@@ -1,20 +1,13 @@
-import { Card } from "../../../components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsTrigger,
-  TabsList,
-} from "../../../components/ui/tabs";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
 import { Cake } from "lucide-react";
-import { useAppSelector } from "../../../hooks/redux";
-import type { RootState } from "../../../store";
+import { useAppSelector } from "@/hooks/redux";
+import type { RootState } from "@/store";
 
 function Celebrations() {
-  const {
-    birthdays,
-    jobAnniversaries: anniversaries,
-    newHires: hires,
-  } = useAppSelector((state: RootState) => state.celebrations);
+  const { birthdays, jobAnniversaries: anniversaries } = useAppSelector(
+    (state: RootState) => state.celebrations
+  );
   return (
     <Card className="border-0 shadow-md bg-[#ffffff]">
       <header className="px-3 sm:px-4 py-2 sm:py-3">

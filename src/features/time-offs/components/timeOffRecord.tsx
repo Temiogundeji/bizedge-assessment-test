@@ -1,43 +1,15 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "../../../components/ui/card";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "../../../components/ui/tabs";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "../../../components/ui/avatar";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { CalendarDays, Clock } from "lucide-react";
+import { useAppSelector } from "@/hooks/redux";
 
-interface TimeoffRecordItem {
-  id: string | number;
-  name: string;
-  role: string;
-  avatar: string;
-  days: number;
-  startDate: string;
-  endDate: string;
-  status: "upcoming" | "ongoing";
-}
-
-interface TimeoffRecordProps {
-  timeoffRecords?: TimeoffRecordItem[];
-}
-
-function TimeoffRecord({ timeoffRecords = [] }: TimeoffRecordProps) {
+function TimeoffRecord() {
   const getStatusCount = (status: "upcoming" | "ongoing") =>
-    timeoffRecords.filter((record) => record.status === status).length;
-
+    timeOffRequests.filter((record) => record.status === status).length;
+  const timeOffRequests = useAppSelector((state) => state.timeoff.requests);
   return (
     <Card className="border-0 shadow-md mt-4 sm:mt-6">
       <CardHeader>
@@ -98,7 +70,7 @@ function TimeoffRecord({ timeoffRecords = [] }: TimeoffRecordProps) {
           <TabsContent value="upcoming">
             <div className="h-[180px] overflow-y-auto">
               <div className="space-y-4">
-                {timeoffRecords
+                {timeOffRequests
                   .filter((record) => record.status === "upcoming")
                   .map((record) => (
                     <div
@@ -110,10 +82,10 @@ function TimeoffRecord({ timeoffRecords = [] }: TimeoffRecordProps) {
                           <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
                             <AvatarImage
                               src={record.avatar}
-                              alt={record.name}
+                              alt={record.employeeName}
                             />
                             <AvatarFallback className="bg-gray-200 text-gray-600 text-xs sm:text-sm">
-                              {record.name
+                              {record.employeeName
                                 .split(" ")
                                 .map((n) => n[0])
                                 .join("")}
@@ -121,10 +93,10 @@ function TimeoffRecord({ timeoffRecords = [] }: TimeoffRecordProps) {
                           </Avatar>
                           <div className="flex flex-col">
                             <span className="font-medium text-gray-900 text-sm sm:text-base">
-                              {record.name}
+                              {record.employeeName}
                             </span>
                             <span className="text-xs sm:text-sm text-gray-500">
-                              {record.role}
+                              {record.position}
                             </span>
                           </div>
                         </div>
@@ -134,13 +106,17 @@ function TimeoffRecord({ timeoffRecords = [] }: TimeoffRecordProps) {
                       </div>
                       <hr className="border-t border-[#FCDC9C] my-2" />
                       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600">
-                        <div className="flex items-center gap-1">
+                        <div className="flex flex-row justify-between items-center gap-1 max-w-full">
                           <CalendarDays className="h-3 w-3 sm:h-4 sm:w-4" />
-                          <span>Start Date: {record.startDate}</span>
+                          <span className="md:text-xs max-w-full">
+                            Start Date: {record.startDate}
+                          </span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
-                          <span>End Date: {record.endDate}</span>
+                          <span className="md:text-xs">
+                            End Date: {record.endDate}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -151,51 +127,60 @@ function TimeoffRecord({ timeoffRecords = [] }: TimeoffRecordProps) {
 
           {/* Ongoing */}
           <TabsContent value="ongoing">
-            <div className="space-y-4">
-              {timeoffRecords
-                .filter((record) => record.status === "ongoing")
-                .map((record) => (
-                  <div
-                    key={record.id}
-                    className="flex flex-col p-2 sm:p-3 bg-blue-50 rounded-lg border border-blue-100"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
-                          <AvatarImage src={record.avatar} alt={record.name} />
-                          <AvatarFallback className="bg-gray-200 text-gray-600 text-xs sm:text-sm">
-                            {record.name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex flex-col">
-                          <span className="font-medium text-gray-900 text-sm sm:text-base">
-                            {record.name}
-                          </span>
-                          <span className="text-xs sm:text-sm text-gray-500">
-                            {record.role}
-                          </span>
-                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 mt-1 text-xs sm:text-sm text-gray-600">
-                            <div className="flex items-center gap-1">
-                              <CalendarDays className="h-3 w-3 sm:h-4 sm:w-4" />
-                              <span>Start Date: {record.startDate}</span>
-                            </div>
-                            <div className="border-l border-[#878787] h-0 sm:h-5 hidden sm:block"></div>
-                            <div className="flex items-center gap-1">
-                              <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
-                              <span>End Date: {record.endDate}</span>
-                            </div>
+            <div className="h-[180px] overflow-y-auto">
+              <div className="space-y-4">
+                {timeOffRequests
+                  .filter((record) => record.status === "ongoing")
+                  .map((record) => (
+                    <div
+                      key={record.id}
+                      className="flex flex-col p-2 sm:p-3 bg-orange-50 rounded-lg border border-orange-100"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
+                            <AvatarImage
+                              src={record.avatar}
+                              alt={record.employeeName}
+                            />
+                            <AvatarFallback className="bg-gray-200 text-gray-600 text-xs sm:text-sm">
+                              {record.employeeName
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex flex-col">
+                            <span className="font-medium text-gray-900 text-sm sm:text-base">
+                              {record.employeeName}
+                            </span>
+                            <span className="text-xs sm:text-sm text-gray-500">
+                              {record.position}
+                            </span>
                           </div>
                         </div>
+                        <Badge className="bg-orange-200 text-orange-800 hover:bg-orange-200 text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
+                          {record.days} Days
+                        </Badge>
                       </div>
-                      <Badge className="bg-blue-200 text-blue-800 hover:bg-blue-200 text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
-                        {record.days} Days
-                      </Badge>
+                      <hr className="border-t border-[#FCDC9C] my-2" />
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600">
+                        <div className="flex flex-row justify-between items-center gap-1 max-w-full">
+                          <CalendarDays className="h-3 w-3 sm:h-4 sm:w-4" />
+                          <span className="md:text-xs max-w-full">
+                            Start Date: {record.startDate}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
+                          <span className="md:text-xs">
+                            End Date: {record.endDate}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
           </TabsContent>
         </Tabs>

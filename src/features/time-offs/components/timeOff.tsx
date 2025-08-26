@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader } from "../../../components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
-import SVGComponent from "../../../lib/svg-component";
+import SVGComponent from "@/lib/svg-component";
 
 interface TimeoffItem {
   type: string;
@@ -35,10 +35,10 @@ function Timeoff({ timeoffData = [], dropdownOptions = [] }: TimeoffProps) {
     setCurrentSlide((prev: number) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  const getCurrentItems = (): TimeoffItem[] => {
-    const start: number = currentSlide * itemsPerSlide["2xl"];
-    return timeoffData.slice(start, start + itemsPerSlide["2xl"]);
-  };
+  // const getCurrentItems = (): TimeoffItem[] => {
+  //   const start: number = currentSlide * itemsPerSlide["2xl"];
+  //   return timeoffData.slice(start, start + itemsPerSlide["2xl"]);
+  // };
 
   return (
     <Card className="shadow-md border-0 mt-4 sm:mt-6">
