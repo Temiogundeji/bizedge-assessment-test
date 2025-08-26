@@ -29,6 +29,7 @@ Check out the live demo deployed on **Netlify**:
 - Start and End Breaks
 - Track elapsed working time
 - Switch between **Remote** and **On-Site** attendance
+- Time off Management
 - Reusable **Modal Components**
 - Responsive design for desktop and mobile
 
@@ -42,7 +43,7 @@ Follow these steps to get the project running locally:
 
 ```bash
 git clone https://github.com/temiogundeji/bizedge-assessment-test.git
-cd attendance-tracker
+cd bizedge-assessment-test
 ````
 
 ### 2. Install dependencies
@@ -81,10 +82,6 @@ npm run preview
 * Lucide React
 * UUID
 * Vite
-
----
-
-## 💡 Notes
 
 * All modals are reusable and can be easily extended
 * Date and time formatting is handled using custom utility functions
