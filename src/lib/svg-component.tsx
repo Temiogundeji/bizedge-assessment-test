@@ -1,5 +1,3 @@
-import * as React from "react";
-
 const SVGComponent = ({ strokeW = 13.5411, ...props }) => (
   <svg
     width={142}

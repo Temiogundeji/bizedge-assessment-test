@@ -1,69 +1,104 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+````markdown
+# Makay
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A modern **Makay - Human Resources Management** built with **Vite**, **React**, **TypeScript**, **Redux Toolkit**, **Tailwind CSS**, **Shadcn/UI**, and **Lucide React**.  
+This project allows employees to **Clock In/Out**, **Start/End Breaks**, and track attendance in real-time. Modals are fully reusable and the dashboard is fully responsive.
 
-## Expanding the ESLint configuration
+![Human Resources Dashboard Screenshot](https://placehold.co/800x400)  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Live Demo
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Check out the live demo deployed on **Netlify**:  
+[Attendance Tracker Live](https://your-netlify-link.netlify.app)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Tech Stack
+
+- **Frontend:** React + TypeScript  
+- **State Management:** Redux Toolkit  
+- **Styling:** Tailwind CSS  
+- **UI Components:** Shadcn/UI  
+- **Icons:** Lucide React  
+- **Unique IDs:** UUID  
+- **Build Tool:** Vite  
+
+---
+
+## Features
+
+- Clock In / Clock Out with confirmation modals
+- Start and End Breaks
+- Track elapsed working time
+- Switch between **Remote** and **On-Site** attendance
+- Reusable **Modal Components**
+- Responsive design for desktop and mobile
+
+---
+
+## Getting Started
+
+Follow these steps to get the project running locally:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/temiogundeji/bizedge-assessment-test.git
+cd attendance-tracker
+````
+
+### 2. Install dependencies
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Run the development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### 4. Build for production
+
+```bash
+npm run build
+```
+
+### 5. Preview the production build
+
+```bash
+npm run preview
+```
+
+
+## Dependencies
+
+* React 18+
+* Redux Toolkit
+* Shadcn/UI
+* Tailwind CSS 3+
+* Lucide React
+* UUID
+* Vite
+
+---
+
+## 💡 Notes
+
+* All modals are reusable and can be easily extended
+* Date and time formatting is handled using custom utility functions
+* Designed with responsiveness and accessibility in mind
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
 ```
