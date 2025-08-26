@@ -6,7 +6,7 @@ const attendanceData = {
     location: "Remote", //Remote or onSite
     currentTime: "09:30",
     date: "Wed 17 Jul, 2023",
-    lastClockIn: null,
+    lastClockIn: "",
     onBreak: false,
     breakStartTime: "",
   },
@@ -53,6 +53,7 @@ const initialState = {
   loading: false,
   error: null,
   clockInModal: false,
+  clockOutModal: false,
   breakEndModal: false,
 };
 
@@ -77,7 +78,7 @@ export const attendanceSlice = createSlice({
       });
     },
     clockOut: (state, action) => {
-      const { time } = action.payload;
+      const { time, date } = action.payload;
       state.currentStatus.isClockedIn = false;
       state.currentStatus.onBreak = false;
 
@@ -108,8 +109,17 @@ export const attendanceSlice = createSlice({
     setLocation: (state, action) => {
       state.currentStatus.location = action.payload;
     },
-    toggleClockInModal: (state) => {
-      state.clockInModal = !state.clockInModal;
+    openClockInModal: (state) => {
+      state.clockInModal = true;
+    },
+    closeClockInModal: (state) => {
+      state.clockInModal = false;
+    },
+    openClockOutModal: (state) => {
+      state.clockOutModal = true;
+    },
+    closeClockOutModal: (state) => {
+      state.clockOutModal = false;
     },
     toggleBreakEndModal: (state) => {
       state.breakEndModal = !state.breakEndModal;
@@ -120,13 +130,17 @@ export const attendanceSlice = createSlice({
   },
 });
 
+export default attendanceSlice.reducer;
 export const {
   clockIn,
   clockOut,
   startBreak,
   endBreak,
   setLocation,
-  toggleClockInModal,
+  openClockOutModal,
+  closeClockOutModal,
+  openClockInModal,
+  closeClockInModal,
   toggleBreakEndModal,
   updateMonthlyStats,
 } = attendanceSlice.actions;

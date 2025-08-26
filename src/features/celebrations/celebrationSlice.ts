@@ -7,7 +7,7 @@ interface Birthday {
   employeeId: string;
   name: string;
   position: string;
-  date: string;
+  birthday: string;
   avatar: string;
   isToday: boolean;
 }
@@ -50,7 +50,25 @@ const celebrations: Omit<CelebrationsState, "activeTab" | "loading" | "error"> =
         employeeId: "emp_001",
         name: "John Micheal",
         position: "Leader Designer",
-        date: "2023-01-23",
+        birthday: "Jan 23",
+        avatar: "/api/placeholder/40/40",
+        isToday: true,
+      },
+      {
+        id: uuidv4(),
+        employeeId: "emp_002",
+        name: "Hassan Oladimeji",
+        position: "Leader Designer",
+        birthday: "Oct 1",
+        avatar: "/api/placeholder/40/40",
+        isToday: true,
+      },
+      {
+        id: uuidv4(),
+        employeeId: "emp_001",
+        name: "Femi David",
+        position: "Leader Designer",
+        birthday: "Jan 23",
         avatar: "/api/placeholder/40/40",
         isToday: true,
       },
@@ -59,7 +77,7 @@ const celebrations: Omit<CelebrationsState, "activeTab" | "loading" | "error"> =
         employeeId: "emp_002",
         name: "John Micheal",
         position: "Leader Designer",
-        date: "2023-01-23",
+        birthday: "Oct 1",
         avatar: "/api/placeholder/40/40",
         isToday: true,
       },
@@ -68,21 +86,21 @@ const celebrations: Omit<CelebrationsState, "activeTab" | "loading" | "error"> =
       {
         id: uuidv4(),
         employeeId: "emp_003",
-        name: "Sarah Johnson",
+        name: "Emmanuel Chukwueze",
         position: "Senior Developer",
         date: "2023-01-23",
         yearsCompleted: 3,
-        avatar: "/api/placeholder/40/40",
+        avatar: "https://placehold.co/600x400",
       },
     ],
     newHires: [
       {
         id: uuidv4(),
         employeeId: "emp_004",
-        name: "Mike Wilson",
+        name: "Ahmed Audu",
         position: "Junior Designer",
         startDate: "2023-01-20",
-        avatar: "/api/placeholder/40/40",
+        avatar: "https://placehold.co/600x400",
       },
     ],
   };

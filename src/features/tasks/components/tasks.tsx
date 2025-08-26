@@ -1,12 +1,11 @@
 import { Card } from "../../../components/ui/card";
 import { BookText } from "lucide-react";
 import type { Task } from "../../../types/tasks";
+import { useAppSelector } from "../../../hooks/redux";
+import type { RootState } from "../../../store";
 
-interface TasksProps {
-  tasks?: Task[];
-}
-
-function Tasks({ tasks = [] }: TasksProps) {
+function Tasks() {
+  const { tasks } = useAppSelector((state: RootState) => state.tasks);
   return (
     <div className="flex w-full sm:w-[400px] 2xl:w-[450px]">
       <Card className="w-full bg-white border-0 shadow-md">

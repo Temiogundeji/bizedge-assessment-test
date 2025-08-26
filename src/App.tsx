@@ -1,6 +1,6 @@
 import Navbar from "./components/layout/Navbar";
 import MainNav from "./components/layout/MainNav";
-import WelcomeHeader from "./components/feature/welcomeHeader";
+import WelcomeHeader from "./components/layout/welcomeHeader";
 import AttendanceTimer from "./features/attendance/components/attendanceTimer";
 import Tasks from "./features/tasks/components/tasks";
 import AttendanceSnapshot from "./features/attendance/components/attendanceSnapshot";
