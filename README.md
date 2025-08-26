@@ -2,8 +2,6 @@
 A modern Human Resources Management** built with **Vite**, **React**, **TypeScript**, **Redux Toolkit**, **Tailwind CSS**, **Shadcn/UI**, and **Lucide React**.  
 This project allows employees to **Clock In/Out**, **Start/End Breaks**, and track attendance in real-time. Modals are fully reusable and the dashboard is fully responsive.
 
-![Human Resources Dashboard Screenshot](https://placehold.co/800x400)  
-
 ## Live Demo
 
 Check out the live demo deployed on **Netlify**:  
