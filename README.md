@@ -1,5 +1,5 @@
 
-A modern Human Resources Management** built with **Vite**, **React**, **TypeScript**, **Redux Toolkit**, **Tailwind CSS**, **Shadcn/UI**, and **Lucide React**.  
+A modern **Human Resources Management** built with **Vite**, **React**, **TypeScript**, **Redux Toolkit**, **Tailwind CSS**, **Shadcn/UI**, and **Lucide React**.  
 This project allows employees to **Clock In/Out**, **Start/End Breaks**, and track attendance in real-time. Modals are fully reusable and the dashboard is fully responsive.
 
 ## Live Demo
